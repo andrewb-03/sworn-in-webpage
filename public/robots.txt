@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /checkout
+Disallow: /order-confirmation
+Sitemap: https://www.sworninusa.com/sitemap.xml
