@@ -20,21 +20,13 @@ export default function Navbar() {
   const { totalItems, openCart } = useCart();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 56);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-
-      {/* ── Promo bar ─────────────────────────────── */}
-      <div className="bg-brand-orange">
-        <p className="text-center text-[11px] font-semibold uppercase tracking-widest text-brand-black py-2 font-barlow">
-          Free U.S. shipping on orders $75+&nbsp;&nbsp;·&nbsp;&nbsp;Use code{" "}
-          <strong>SWORN25</strong> for 10% off your first order
-        </p>
-      </div>
 
       {/* ── Main nav ──────────────────────────────── */}
       <nav
