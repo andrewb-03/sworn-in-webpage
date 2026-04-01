@@ -34,7 +34,7 @@ const FAQS = [
   },
   {
     q: 'How do I know what size to order?',
-    a: 'Our clothing fits true to size. If you are between sizes we recommend sizing up, especially for hoodies. Still unsure? Email us and we will help you figure it out.',
+    a: 'Our klothing fits true to size. If you are between sizes we recommend sizing up, especially for hoodies. Still unsure? Email us and we will help you figure it out.',
   },
   {
     q: 'Can I change or cancel my order?',

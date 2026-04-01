@@ -8,15 +8,15 @@ import ProductCard, { type ProductCardProps } from "@/components/ProductCard";
 
 /* ─── Page metadata ──────────────────────────────────────── */
 export const metadata: Metadata = {
-  title: "Sworn In USA | Bold American Clothing",
+  title: "Sworn In USA | Bold American Klothing",
   description:
-    "Bold American clothing for people who know exactly who they are. Shop tees, hoodies, hats and more. Put your money where your pride is.",
+    "Bold American klothing for people who know exactly who they are. Shop tees, hoodies, hats and more. Put your money where your pride is.",
   alternates: {
     canonical: "https://www.sworninusa.com",
   },
   openGraph: {
-    title:       "Sworn In USA | Bold American Clothing",
-    description: "Bold American clothing for people who know exactly who they are.",
+    title:       "Sworn In USA | Bold American Klothing",
+    description: "Bold American klothing for people who know exactly who they are.",
     url:         "https://www.sworninusa.com",
     images:      ["/images/og-image.jpg"],
   },

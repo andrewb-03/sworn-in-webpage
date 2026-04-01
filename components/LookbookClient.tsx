@@ -308,7 +308,7 @@ export default function LookbookClient() {
               lineHeight:  1.7,
               margin:      0,
             }}>
-              Real people. Real clothing.{' '}
+              Real people. Real klothing.{' '}
               No studio lighting required.
             </p>
           </div>

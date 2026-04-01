@@ -6,7 +6,7 @@ import ShopClient from "@/components/ShopClient";
 export const metadata: Metadata = {
   title: "Shop | The Collection",
   description:
-    "Browse the full Sworn In USA collection. Hoodies, tees, long sleeves, hats and beanies. Bold American clothing built to last.",
+    "Browse the full Sworn In USA collection. Hoodies, tees, long sleeves, hats and beanies. Bold American klothing built to last.",
   alternates: {
     canonical: "https://www.sworninusa.com/shop",
   },

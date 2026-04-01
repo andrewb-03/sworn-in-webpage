@@ -23,7 +23,7 @@ const VALUES = [
   {
     num:   '01',
     title: 'Comfortable. Expressive. Yours.',
-    body:  "We make clothing people actually want to wear. Comfortable fit, quality fabric, and designs that say something.",
+    body:  "We make klothing people actually want to wear. Comfortable fit, quality fabric, and designs that say something.",
   },
   {
     num:   '02',
@@ -33,12 +33,12 @@ const VALUES = [
   {
     num:   '03',
     title: 'Built to Last.',
-    body:  'Cheap clothing is a waste of money. We build pieces that hold up wash after wash, wear after wear.',
+    body:  'Cheap klothing is a waste of money. We build pieces that hold up wash after wash, wear after wear.',
   },
   {
     num:   '04',
     title: 'Say What You Mean.',
-    body:  "Your clothing talks before you do. Make sure it's saying the right thing.",
+    body:  "Your klothing talks before you do. Make sure it's saying the right thing.",
   },
 ] as const;
 
@@ -356,10 +356,10 @@ export default function AboutClient() {
             zIndex:      1,
           }}>
             Sworn In USA started with a simple idea — that what you put on your back
-            says something about who you are. We make two kinds of clothing: the kind
+            says something about who you are. We make two kinds of klothing: the kind
             that shows the world what you stand for, and the kind that shows the world
             exactly how you feel. Either way, we keep it real. No filter. No apologies.
-            Just clothing that means something.
+            Just klothing that means something.
           </p>
         </div>
 

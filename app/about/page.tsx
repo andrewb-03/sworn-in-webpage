@@ -4,7 +4,7 @@ import AboutClient from "@/components/AboutClient";
 export const metadata: Metadata = {
   title: "Our Story",
   description:
-    "Put your money where your pride is. Learn about Sworn In USA — bold American clothing for people with conviction.",
+    "Put your money where your pride is. Learn about Sworn In USA — bold American klothing for people with conviction.",
   alternates: {
     canonical: "https://www.sworninusa.com/about",
   },
