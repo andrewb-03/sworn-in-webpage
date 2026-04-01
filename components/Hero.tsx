@@ -96,7 +96,14 @@ export default function Hero() {
           variants={ruleVariants}
         />
 
-        {/* 4 — Subtext */}
+        {/* 4 — Owner line */}
+        <motion.p
+          className="font-bebas text-[clamp(1.25rem,3.2vw,1.9rem)] tracking-[0.16em] text-brand-white/88 mb-10 px-2"
+          variants={fadeUpVariants}
+        >
+          Time Waits For No Man
+        </motion.p>
+
         {/* 5 — CTA buttons */}
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"

@@ -14,9 +14,9 @@ export const BRAND_COLORS = {
 } as const;
 
 export const NAV_LINKS = [
-  { label: "Home",     href: "/"                       },
-  { label: "Shop Now", href: "/shop"                   },
-  { label: "Hats",     href: "/shop?category=headwear" },
+  { label: "Home",      href: "/"     },
+  { label: "Shop Now",  href: "/shop" },
+  { label: "Our Story", href: "/about"},
 ] as const;
 
 export const SOCIAL_LINKS = {

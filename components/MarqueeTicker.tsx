@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 
 const TICKER_ITEMS = [
   "SAY WHAT YOU MEAN. WEAR WHAT YOU FEEL.",
+  "TIME WAITS FOR NO MAN.",
   "FREE U.S. SHIPPING ON ORDERS $75+",
   "NO FILTER. NO APOLOGIES.",
   "NEW DROPS — SHOP NOW",
