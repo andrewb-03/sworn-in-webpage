@@ -105,7 +105,7 @@ export default function Footer({ className }: FooterProps) {
               color:      "rgba(245,242,237,0.3)",
               margin:     0,
             }}>
-              &copy; 2026 Sworn In USA. All Rights Reserved.
+              &copy; 2002 Sworn In USA. All Rights Reserved.
             </p>
             <p style={{
               fontFamily: "var(--font-barlow), sans-serif",
