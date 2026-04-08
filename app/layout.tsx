@@ -1,10 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Bebas_Neue, Barlow } from "next/font/google";
 import { CartProvider } from "@/context/CartContext";
-import Navbar     from "@/components/Navbar";
-import Footer     from "@/components/Footer";
-import CartDrawer from "@/components/CartDrawer";
-import PageLoader from "@/components/PageLoader";
+import Navbar          from "@/components/Navbar";
+import Footer          from "@/components/Footer";
+import CartDrawer      from "@/components/CartDrawer";
+import PageLoader      from "@/components/PageLoader";
+import NewsletterPopup from "@/components/NewsletterPopup";
 import "./globals.css";
 
 /* ─── Fonts ──────────────────────────────────────────────── */
@@ -118,6 +119,7 @@ export default function RootLayout({
           {children}
           <Footer />
           <CartDrawer />
+          <NewsletterPopup />
         </CartProvider>
       </body>
     </html>
