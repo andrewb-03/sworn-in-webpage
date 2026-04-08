@@ -54,7 +54,6 @@ export async function POST(req: NextRequest) {
               },
             ],
           },
-          historical_import: false,
         },
         relationships: {
           list: {
