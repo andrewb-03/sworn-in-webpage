@@ -31,6 +31,14 @@ export default function NewsletterPopup() {
   const [mounted,  setMounted]  = useState(false);
   const [phone,    setPhone]    = useState('');
   const [consent,  setConsent]  = useState(false);
+
+  const formatPhone = (val: string) => {
+    const digits = val.replace(/\D/g, '').slice(0, 10);
+    if (digits.length === 0) return '';
+    if (digits.length <= 3)  return `(${digits}`;
+    if (digits.length <= 6)  return `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+    return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+  };
   const [status,   setStatus]   = useState<Status>('idle');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -50,9 +58,10 @@ export default function NewsletterPopup() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!phone.trim()) {
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 10) {
       setStatus('error');
-      setErrorMsg('Please enter your phone number.');
+      setErrorMsg('Please enter a valid 10-digit phone number.');
       return;
     }
     if (!consent) {
@@ -207,8 +216,11 @@ export default function NewsletterPopup() {
                     className="popup-input"
                     type="tel"
                     value={phone}
-                    onChange={(e) => { setPhone(e.target.value); if (status === 'error') { setStatus('idle'); setErrorMsg(''); } }}
-                    placeholder="Your phone number"
+                    onChange={(e) => {
+                      setPhone(formatPhone(e.target.value));
+                      if (status === 'error') { setStatus('idle'); setErrorMsg(''); }
+                    }}
+                    placeholder="+1 (xxx)-xxx-xxxx"
                     autoComplete="tel"
                     disabled={status === 'loading'}
                     style={{

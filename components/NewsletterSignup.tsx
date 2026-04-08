@@ -10,11 +10,9 @@ interface NewsletterSignupProps {
 type Status = "idle" | "loading" | "success" | "error";
 
 export default function NewsletterSignup({ className }: NewsletterSignupProps) {
-  const [email,      setEmail]      = useState("");
-  const [phone,      setPhone]      = useState("");
-  const [smsConsent, setSmsConsent] = useState(false);
-  const [status,     setStatus]     = useState<Status>("idle");
-  const [errorMsg,   setErrorMsg]   = useState("");
+  const [email,    setEmail]    = useState("");
+  const [status,   setStatus]   = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,14 +30,12 @@ export default function NewsletterSignup({ className }: NewsletterSignupProps) {
       const res = await fetch("/api/klaviyo", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ email, phone: phone || undefined, smsConsent }),
+        body:    JSON.stringify({ email, smsConsent: false }),
       });
 
       if (res.ok) {
         setStatus("success");
         setEmail("");
-        setPhone("");
-        setSmsConsent(false);
       } else {
         setStatus("error");
         setErrorMsg("Something went wrong. Please try again.");
@@ -133,40 +129,6 @@ export default function NewsletterSignup({ className }: NewsletterSignupProps) {
                 </button>
               </div>
 
-              {/* Phone row */}
-              <div className="mb-4">
-                <label htmlFor="newsletter-phone" className="sr-only">Phone number (optional)</label>
-                <input
-                  id="newsletter-phone"
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="Phone number (optional — for SMS updates)"
-                  autoComplete="tel"
-                  disabled={status === "loading"}
-                  className={cn(
-                    "w-full bg-brand-black border border-white/10 px-5 py-3.5 font-barlow text-sm text-brand-white placeholder:text-brand-white/25 outline-none transition-colors duration-200",
-                    "focus:border-brand-orange-dark",
-                    status === "loading" && "opacity-60 cursor-not-allowed"
-                  )}
-                />
-              </div>
-
-              {/* SMS consent checkbox — only shown when phone is entered */}
-              {phone.trim().length > 0 && (
-                <label className="flex items-start gap-3 mb-4 cursor-pointer text-left">
-                  <input
-                    type="checkbox"
-                    checked={smsConsent}
-                    onChange={(e) => setSmsConsent(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 accent-brand-orange flex-shrink-0 cursor-pointer"
-                  />
-                  <span className="font-barlow text-[11px] text-brand-white/40 leading-relaxed">
-                    Yes, text me new drops, exclusive offers, and order updates from Sworn In USA.
-                    Message & data rates may apply. Reply STOP to unsubscribe at any time.
-                  </span>
-                </label>
-              )}
 
               {status === "error" && (
                 <p className="font-barlow text-xs text-brand-red mt-1 mb-3 tracking-wide animate-fade-in">
@@ -175,9 +137,7 @@ export default function NewsletterSignup({ className }: NewsletterSignupProps) {
               )}
 
               <p className="font-barlow text-[10px] text-brand-white/25 tracking-wide leading-relaxed">
-                By signing up you agree to receive marketing emails from Sworn In USA.
-                {phone.trim() && smsConsent && " You also consent to receive SMS marketing messages. "}
-                {" "}Unsubscribe at any time. We respect your privacy.
+                By signing up you agree to receive marketing emails from Sworn In USA. Unsubscribe at any time. We respect your privacy.
               </p>
             </form>
           </>
