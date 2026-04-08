@@ -3,28 +3,35 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(req: NextRequest) {
   try {
     const { email, phone, smsConsent } = await req.json() as {
-      email:      string;
+      email?:     string;
       phone?:     string;
       smsConsent: boolean;
     };
 
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return NextResponse.json({ error: 'Valid email is required.' }, { status: 400 });
+    /* Must have at least email or phone */
+    if (!email && !phone) {
+      return NextResponse.json({ error: 'Email or phone number is required.' }, { status: 400 });
+    }
+
+    /* Validate email format if provided */
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: 'Enter a valid email address.' }, { status: 400 });
     }
 
     const privateKey = process.env.KLAVIYO_PRIVATE_KEY!;
     const listId     = process.env.KLAVIYO_LIST_ID!;
 
-    /* Build subscriptions — always subscribe email; only subscribe SMS if consent given + phone provided */
-    const subscriptions: Record<string, unknown> = {
-      email: { marketing: { consent: 'SUBSCRIBED' } },
-    };
+    /* Build subscriptions */
+    const subscriptions: Record<string, unknown> = {};
 
+    if (email) {
+      subscriptions.email = { marketing: { consent: 'SUBSCRIBED' } };
+    }
     if (smsConsent && phone) {
       subscriptions.sms = { marketing: { consent: 'SUBSCRIBED' } };
     }
 
-    /* Normalize phone to E.164 if provided (strip non-digits, add +1 for US if needed) */
+    /* Normalize phone to E.164 */
     let normalizedPhone: string | undefined;
     if (phone) {
       const digits = phone.replace(/\D/g, '');
@@ -40,8 +47,8 @@ export async function POST(req: NextRequest) {
               {
                 type: 'profile',
                 attributes: {
-                  email,
-                  ...(normalizedPhone ? { phone_number: normalizedPhone } : {}),
+                  ...(email          ? { email }                             : {}),
+                  ...(normalizedPhone ? { phone_number: normalizedPhone }    : {}),
                   subscriptions,
                 },
               },
@@ -70,7 +77,6 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    /* Klaviyo returns 202 Accepted on success */
     if (res.status === 202 || res.ok) {
       return NextResponse.json({ success: true });
     }
