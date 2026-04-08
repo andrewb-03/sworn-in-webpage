@@ -125,6 +125,7 @@ export default function CheckoutClient() {
   const [errors,       setErrors]       = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError,  setSubmitError]  = useState('');
+  const [smsConsent,   setSmsConsent]   = useState(false);
 
   /* Derived totals (mirrors drawer logic) */
   const afterDiscount = totalPrice - discount;
@@ -168,6 +169,18 @@ export default function CheckoutClient() {
         total:     orderTotal,
         promoCode: promoCode ?? '',
       });
+
+      /* Subscribe to Klaviyo list (email always; SMS if consent given + phone provided) */
+      await fetch('/api/klaviyo', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          email:      formData.email,
+          phone:      formData.phone || undefined,
+          smsConsent: smsConsent && !!formData.phone,
+        }),
+      }).catch(() => { /* non-fatal — don't block order confirmation */ });
+
       clearCart();
       router.push('/order-confirmation');
     } catch {
@@ -257,6 +270,25 @@ export default function CheckoutClient() {
                 options={['United States', 'Canada', 'United Kingdom', 'Australia', 'Other']}
               />
             </div>
+
+            {/* SMS opt-in */}
+            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', margin: '1.25rem 0', cursor: 'pointer' }}>
+              <input
+                type="checkbox"
+                checked={smsConsent}
+                onChange={(e) => setSmsConsent(e.target.checked)}
+                style={{ marginTop: 2, width: 16, height: 16, accentColor: T.orange, flexShrink: 0, cursor: 'pointer' }}
+              />
+              <span style={{ fontFamily: T.barlow, fontSize: '0.78rem', color: T.grayMid, lineHeight: 1.6 }}>
+                Text me new drops, exclusive offers, and order updates from Sworn In USA.
+                Message &amp; data rates may apply. Reply STOP to unsubscribe.
+                {!formData.phone && (
+                  <span style={{ color: 'rgba(255,255,255,0.25)', display: 'block', marginTop: '0.2rem', fontSize: '0.72rem' }}>
+                    (Add a phone number above to enable SMS)
+                  </span>
+                )}
+              </span>
+            </label>
 
             {submitError && (
               <p style={{ fontFamily: T.barlow, fontSize: '0.85rem', color: T.red, marginBottom: '1rem', lineHeight: 1.5 }}>

@@ -107,6 +107,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${bebasNeue.variable} ${barlow.variable}`}>
+      <head>
+        {/* Klaviyo onsite script */}
+        <script async src={`https://static.klaviyo.com/onsite/js/${process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID}/klaviyo.js?company_id=${process.env.NEXT_PUBLIC_KLAVIYO_COMPANY_ID}`} />
+      </head>
       <body className="antialiased bg-brand-black text-brand-white font-barlow">
         <CartProvider>
           <PageLoader />
